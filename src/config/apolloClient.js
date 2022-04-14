@@ -21,7 +21,7 @@ const errorLink = onError(
 const link = from([
   errorLink,
   new HttpLink({
-    uri: "https://fullstack-engineer-test-n4ouilzfna-uc.a.run.app/graphql",
+    uri: process.env.REACT_APP_API_URL,
   }),
 ]);
 

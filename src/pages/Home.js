@@ -14,11 +14,10 @@ const Home = () => {
     if (data) {
       setBooks([data.book]);
     }
-    console.log(data);
   }, [data]);
 
   if (loading) return <DefaultLayout>Loading...</DefaultLayout>;
-  if (error) return <DefaultLayout>Error</DefaultLayout>;
+  if (error) return <DefaultLayout>{error}</DefaultLayout>;
   return (
     <DefaultLayout>
       {console.log("books", books)}
