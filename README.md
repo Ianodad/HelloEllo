@@ -2,7 +2,8 @@
 
 #### Example:
 
-This is a simple profile view app to users
+This is book book app for kids.
+
 
 ## Project Status
 
@@ -12,7 +13,6 @@ This is a simple profile view app to users
 - [x] Display word in book
 - [x] Onclick feature each word
 - [x] Display each word in modal from token
-- [ ]
 
 ## Installation and Setup Instructions
 
