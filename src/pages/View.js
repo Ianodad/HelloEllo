@@ -1,22 +1,24 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_BOOK } from "../graphql/Queries";
-import DefaultLayout from "../layouts/DefaultLayout";
-import HTMLFlipBook from "react-pageflip";
+/* eslint-disable react/no-array-index-key */
 import "./View.scss";
-import Page from "../components/Page";
+
+import { useQuery } from "@apollo/client";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import HTMLFlipBook from "react-pageflip";
+
 import BookCover from "../components/BookCover";
 import Modal from "../components/Modal";
+import Page from "../components/Page";
+import { GET_BOOK } from "../graphql/Queries";
+import DefaultLayout from "../layouts/DefaultLayout";
 
-const View = () => {
+function View() {
   const [bookDetails, setDetails] = useState({});
   const [bookPages, setPages] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedWord, setSelectedWord] = useState("");
   const [modalVisibility, setModalVisibility] = useState(false);
-  const [height, setHeight] = useState(window.innerHeight);
-  const [width, setWidth] = useState(window.innerWidth);
+
   const book = useRef();
 
   const { loading, error, data } = useQuery(GET_BOOK);
@@ -43,7 +45,7 @@ const View = () => {
     setSelectedWord("");
   };
   // setting page count
-  const onInit = useCallback((e) => {
+  const onInit = useCallback(() => {
     if (book && book.current) {
       setPageCount(book.current.pageFlip().getPageCount());
     }
@@ -56,13 +58,20 @@ const View = () => {
     }
   }, [data]);
   if (loading) return <DefaultLayout>Loading...</DefaultLayout>;
-  if (error) return <DefaultLayout>Error</DefaultLayout>;
+  if (error) return <DefaultLayout>{error}</DefaultLayout>;
 
   return (
     <DefaultLayout>
+      {modalVisibility && (
+        <Modal
+          modalVisibility={modalVisibility}
+          handleClose={handleClose}
+          selectedWord={selectedWord}
+        />
+      )}
       <div className="view-container">
         <HTMLFlipBook
-          showCover={true}
+          showCover
           width={600}
           height={720}
           minHeight={200}
@@ -73,7 +82,7 @@ const View = () => {
           useMouseEvents={false}
           style={{ margin: "0 auto" }}
         >
-          <BookCover />
+          <BookCover title={bookDetails.title} author={bookDetails.author} />
           {bookPages.map((page, index) => (
             <div className="page" key={index}>
               <Page
@@ -86,21 +95,20 @@ const View = () => {
               </Page>
             </div>
           ))}
-          <BookCover v />
+          <BookCover title="THE END" />
         </HTMLFlipBook>
         <div className="book-actions">
-          <button onClick={prevPage}>Prev</button>
+          <button type="button" onClick={prevPage}>
+            Prev
+          </button>
           {currentPage + 1} of {pageCount}
-          <button onClick={nextPage}>Next</button>
+          <button type="button" onClick={nextPage}>
+            Next
+          </button>
         </div>
       </div>
-      <Modal
-        modalVisibility={modalVisibility}
-        handleClose={handleClose}
-        selectedWord={selectedWord}
-      />
     </DefaultLayout>
   );
-};
+}
 
 export default View;

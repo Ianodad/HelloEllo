@@ -3,10 +3,7 @@
 #container-layout {
   padding-right: 15%;
   padding-left: 15%;
-  font-weight: normal;
-  font-style: normal;
-  display: flex;
-  flex-direction: column;
+  text-align: center;
 }
 .H1 {
   font-family: $luckiest-guy;
@@ -15,6 +12,13 @@
   color: $background-primary;
   text-align: center;
   margin-bottom: 1rem;
+  letter-spacing:0.05em
+}
+.H2 {
+  font-family: $luckiest-guy;
+  color: $background-primary;
+  font-size: 3rem;
+  font-weight: bold;
 }
 .H3 {
   font-family: $love-ya-like-a-sister;
@@ -24,9 +28,25 @@
   text-align: center;
   margin-bottom: 1rem;
 }
+.H4 {
+  font-family: $luckiest-guy;
+  font-size: 2rem;
+  font-weight: bold;
+  color: $background-primary;
+  text-align: center;
+  margin-bottom: 1.8rem;
+  &.lfr {
+    font-family: $love-ya-like-a-sister;
+    color: $background-tertiary;
+  }
+}
+.PG {
+  font-family: $love-ya-like-a-sister;
+  color: $background-primary;
+  font-size: 3rem;
+}
 @media (min-width: 768px) {
   #container-layout {
-    width: 98%;
     padding-right: 5%;
     padding-left: 5%;
   }
@@ -36,10 +56,12 @@
   .H3 {
     font-size: 3rem;
   }
+  .PG {
+    font-size: 2.5rem;
+  }
 }
 @media (min-width: 992px) {
   #container-layout {
-    width: 90%;
     padding-right: 10%;
     padding-left: 10%;
   }
@@ -51,9 +73,6 @@
   }
 }
 @media (min-width: 1200px) {
-  #container-layout {
-    width: 90%;
-  }
   .H1 {
     font-size: 5.5rem;
   }

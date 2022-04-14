@@ -1,11 +1,13 @@
+import "./index.css";
+
+import { ApolloProvider } from "@apollo/client";
 import React from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import client from "./config/apolloClient";
-import { ApolloProvider } from "@apollo/client";
 import { BrowserRouter as Router } from "react-router-dom";
+
+import App from "./App";
+import client from "./config/apolloClient";
+import reportWebVitals from "./reportWebVitals";
 
 // ReactDOM.render(
 //   <React.StrictMode>

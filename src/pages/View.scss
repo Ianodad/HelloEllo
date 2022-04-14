@@ -1,50 +1,55 @@
 @import "../config/variables";
 
 .view-container {
-  width: 100%;
-  height: 100%;
+
   margin-top: 2%;
 
-  background-size: cover;
 }
 
 .page {
   background-color: white;
-  border: solid 3px hsl(35, 20, 70);
+  border: solid 3px grey;
   display: flex;
   text-align: center;
-
   position: absolute;
-
+  .page-content{
+    margin-left: 2em;
+    margin-right:2em
+  }
   margin-top: auto;
   margin-bottom: auto;
   .page-text {
     margin-top: 50%;
-    font-size: 2em;
   }
   .page-word {
     &:hover {
-      color: green;
+      color: $background-tertiary;
       cursor: pointer;
     }
   }
   &.--left {
     border-right: 0;
     box-shadow: inset -7px 0 30px -7px rgba(0, 0, 0, 0.4);
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
   }
 
   &.--right {
     border-left: 0;
     box-shadow: inset 7px 0 30px -7px rgba(0, 0, 0, 0.4);
+    border-top-right-radius: 1em;
+    border-bottom-right-radius: 1em;
 
     .page-footer {
       text-align: right;
     }
   }
   &.page-cover {
-    background-color: hsl(35, 45, 80);
-    color: hsl(35, 35, 35);
-    border: solid 1px hsl(35, 20, 50);
+    background-color: $background-secondary;
+    color: $background-secondary;
+    // border: solid 1px $background-secondary;
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
 
     h2 {
       text-align: center;
@@ -69,4 +74,51 @@
   margin-top: 3em;
   align-items: center;
   text-align: center;
+  
+  button{
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+  }
+}
+
+.modal-container {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: 30em;
+  height: 12em;
+  z-index: 1010;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 0.4em;
+  &.hidden {
+    display: none;
+  }
+  .modal-text {
+    margin-top: 10%;
+    font-size: 4em;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 4%;
+    right: 2%;
+  }
+}
+.modal-overlay {
+  z-index: 999;
+  position: absolute;
+  left: 0;
+  top: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  background-color: grey;
+  border: 1px solid;
+  &.hidden {
+    display: none;
+  }
 }

@@ -1,3 +1,6 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from "react";
 
 const Page = React.forwardRef(({ tokens, children, onSelectedWord }, ref) => {
@@ -7,29 +10,27 @@ const Page = React.forwardRef(({ tokens, children, onSelectedWord }, ref) => {
     onSelectedWord(tokens[index].value);
   };
 
-  const sentnceCleaner = () => {
+  const sentenceCleaner = () => {
     const regEx = /(^\w{1}|\.\s*\w{1})/gi;
-    let clean = children.replace(regEx, function (toReplace) {
+    // eslint-disable-next-line func-names
+    const clean = children.replace(regEx, function (toReplace) {
       return toReplace.toUpperCase();
     });
     // console.log("clean", clean);
 
     return clean.split(/ /g).map((word, index) => (
       <span
-        className="page-word"
+        className="page-word PG"
         key={index}
         onClick={() => handleClick(word, index)}
       >
-        {" " + word}
+        {` ${word}`}
       </span>
     ));
   };
   return (
     <div className="page-content" ref={ref}>
-      {/* {console.log(children, "children")} */}
-      <p className="page-text">{sentnceCleaner()}</p>
-      {/* <div className="page-text">{children}</div> */}
-      {/* <div className="page-footer">{pageNumber + 1}</div> */}
+      <p className="page-text">{sentenceCleaner()}</p>
     </div>
   );
 });
