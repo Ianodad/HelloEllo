@@ -39,7 +39,7 @@ To Visit App:
 ### Run with Docker
 
 ```console
-cd Client
+cd helloello
 docker build -t helloello .
 
 docker run --name helloello -d -p 3000:3000 helloello:latest
