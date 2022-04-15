@@ -1,83 +1,238 @@
 @import "../config/variables";
 
 .view-container {
-
-  margin-top: 2%;
-
-}
-
-.page {
-  background-color: white;
-  border: solid 3px grey;
   display: flex;
-  text-align: center;
-  position: absolute;
-  .page-content{
-    margin-left: 2em;
-    margin-right:2em
-  }
-  margin-top: auto;
-  margin-bottom: auto;
-  .page-text {
-    margin-top: 50%;
-  }
-  .page-word {
-    &:hover {
-      color: $background-tertiary;
-      cursor: pointer;
-    }
-  }
-  &.--left {
-    border-right: 0;
-    box-shadow: inset -7px 0 30px -7px rgba(0, 0, 0, 0.4);
-    border-top-left-radius: 1em;
-    border-bottom-left-radius: 1em;
-  }
-
-  &.--right {
-    border-left: 0;
-    box-shadow: inset 7px 0 30px -7px rgba(0, 0, 0, 0.4);
-    border-top-right-radius: 1em;
-    border-bottom-right-radius: 1em;
-
-    .page-footer {
-      text-align: right;
-    }
-  }
-  &.page-cover {
-    background-color: $background-secondary;
-    color: $background-secondary;
-    // border: solid 1px $background-secondary;
-    border-top-left-radius: 0.5em;
-    border-bottom-left-radius: 0.5em;
-
-    h2 {
-      text-align: center;
-      padding-top: 50%;
-      font-size: 210%;
-    }
-
-    &.page-cover-top {
-      box-shadow: inset 0px 0 30px 0px rgba(36, 10, 3, 0.5),
-        -2px 0 5px 2px rgba(0, 0, 0, 0.4);
-    }
-
-    &.page-cover-bottom {
-      box-shadow: inset 0px 0 30px 0px rgba(36, 10, 3, 0.5),
-        10px 0 8px 0px rgba(0, 0, 0, 0.4);
-    }
-  }
-}
-
-.book-actions {
-  flex-direction: row;
-  margin-top: 3em;
+  flex-direction: column;
+  // margin-top: 3em;
   align-items: center;
   text-align: center;
-  
-  button{
-    margin-left: 0.2em;
-    margin-right: 0.2em;
+  margin-top: 2%;
+
+  .--portrait {
+    padding-bottom: 20% !important;
+  }
+
+  .book-actions {
+    margin-top: 3em;
+    display: flex;
+    flex-direction: row;
+    // margin-top: 3em;
+    align-items: center;
+    text-align: center;
+    &.top-pg {
+      display: none;
+    }
+    .pagination {
+      font-family: $roboto;
+    }
+    button {
+      border: none;
+      background: none;
+      &.open-button {
+        border: solid 0.4em $background-tertiary;
+        border-radius: 1.4em;
+        .open-button-text {
+          font-size: 2.5em;
+          color: $background-tertiary;
+          font-weight: 600;
+        }
+        &:hover {
+          border: solid 0.4em $background-primary;
+          transform: scale(1.1);
+          .open-button-text {
+            color: $background-primary;
+          }
+        }
+      }
+      cursor: pointer;
+      svg {
+        color: $background-tertiary;
+        &:hover {
+          color: $background-primary;
+        }
+      }
+
+      // width: 4em;
+      // height: 4em;
+      .prev-icon {
+        font-size: 4em;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+      .next-icon {
+        font-size: 4em;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+  .page-cover {
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .open-icon-container {
+      margin-top: 1.5em;
+      margin-right: 1.5em;
+      animation: 1s ease-out 0s 3 pulse;
+
+      .open-icon {
+        float: right;
+        font-size: 3.5em;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+  .page {
+    background-color: white;
+    border: solid 3px grey;
+    display: flex;
+    text-align: center;
+    position: absolute;
+    .page-content {
+      margin-left: 2em;
+      margin-right: 2em;
+    }
+    margin-top: auto;
+    margin-bottom: auto;
+    .page-text {
+      margin-top: 50%;
+    }
+    .page-word {
+      &:hover {
+        color: $background-tertiary;
+        cursor: pointer;
+      }
+    }
+    &.--left {
+      border-right: 0;
+      box-shadow: inset -7px 0 30px -7px rgba(0, 0, 0, 0.4);
+      border-top-left-radius: 1em;
+      border-bottom-left-radius: 1em;
+      .page-number {
+        position: absolute;
+
+        bottom: 0;
+      }
+      .page-icon {
+        position: absolute;
+        top: 0;
+        margin-top: 0.5em;
+        font-size: 3em;
+
+        svg {
+          color: $background-tertiary;
+          &:hover {
+            transform: scale(1.1);
+            color: $background-primary;
+          }
+        }
+      }
+    }
+
+    &.--right {
+      border-left: 0;
+      box-shadow: inset 7px 0 30px -7px rgba(0, 0, 0, 0.4);
+      border-top-right-radius: 1em;
+      border-bottom-right-radius: 1em;
+      .page-number {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        margin-right: 2em;
+      }
+      .page-icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-top: 0.5em;
+        margin-right: 0.7em;
+        font-size: 3em;
+        svg {
+          color: $background-tertiary;
+          &:hover {
+            transform: scale(1.1);
+            color: $background-primary;
+          }
+        }
+      }
+
+      .page-footer {
+        text-align: right;
+      }
+    }
+
+    &.page-cover {
+      // background: linear-gradient(
+      //   90deg,
+      //   hsla(37, 99%, 61%, 1) 0%,
+      //   hsla(60, 90%, 63%, 1) 40%,
+      //   hsla(60, 90%, 63%, 1) 52%,
+      //   hsla(60, 90%, 63%, 1) 100%
+      // );
+
+      background-image: radial-gradient(
+        circle at top left,
+        $background-primary,
+        $background-primary 20%,
+        $background-tertiary 20%,
+        $background-tertiary 40%,
+        $background-tertiary-two 40%,
+        $background-tertiary-two 60%,
+        $background-secondary 60%,
+        $background-secondary 80%,
+        $background-secondary 20%,
+        $background 80%
+      );
+
+      color: $background-secondary;
+      // border: solid 1px $background-secondary;
+      border-top-left-radius: 0.5em;
+      border-bottom-left-radius: 0.5em;
+
+      h2 {
+        text-align: center;
+        padding-top: 50%;
+        font-size: 210%;
+      }
+
+      &.page-cover-top {
+        box-shadow: inset 0px 0 30px 0px rgba(36, 10, 3, 0.5),
+          -2px 0 5px 2px rgba(0, 0, 0, 0.4);
+      }
+
+      &.page-cover-bottom {
+        box-shadow: inset 0px 0 30px 0px rgba(36, 10, 3, 0.5),
+          10px 0 8px 0px rgba(0, 0, 0, 0.4);
+      }
+    }
+  }
+  @media (max-width: 1250px) {
+    .page-icon {
+      display: none;
+    }
+    .book-actions {
+      &.top-pg {
+        display: flex;
+        margin-bottom: 2em;
+        .open-button {
+          display: none;
+        }
+      }
+    }
   }
 }
 

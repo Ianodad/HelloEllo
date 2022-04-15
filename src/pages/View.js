@@ -8,6 +8,7 @@ import HTMLFlipBook from "react-pageflip";
 import BookCover from "../components/BookCover";
 import Modal from "../components/Modal";
 import Page from "../components/Page";
+import Pagination from "../components/Pagination";
 import { GET_BOOK } from "../graphql/Queries";
 import DefaultLayout from "../layouts/DefaultLayout";
 
@@ -70,10 +71,17 @@ function View() {
         />
       )}
       <div className="view-container">
+        <Pagination
+          className="top-pg"
+          currentPage={currentPage}
+          pageCount={pageCount}
+          prevPage={prevPage}
+          nextPage={nextPage}
+        />
         <HTMLFlipBook
           showCover
-          width={600}
-          height={720}
+          width={500}
+          height={700}
           minHeight={200}
           minWidth={200}
           ref={book}
@@ -82,7 +90,11 @@ function View() {
           useMouseEvents={false}
           style={{ margin: "0 auto" }}
         >
-          <BookCover title={bookDetails.title} author={bookDetails.author} />
+          <BookCover
+            title={bookDetails.title}
+            author={bookDetails.author}
+            onOpen={() => nextPage()}
+          />
           {bookPages.map((page, index) => (
             <div className="page" key={index}>
               <Page
@@ -90,6 +102,8 @@ function View() {
                 index={index}
                 tokens={page.tokens}
                 onSelectedWord={onSelectedWord}
+                onPrev={() => prevPage()}
+                onNext={() => nextPage()}
               >
                 {page.content}
               </Page>
@@ -97,15 +111,13 @@ function View() {
           ))}
           <BookCover title="THE END" />
         </HTMLFlipBook>
-        <div className="book-actions">
-          <button type="button" onClick={prevPage}>
-            Prev
-          </button>
-          {currentPage + 1} of {pageCount}
-          <button type="button" onClick={nextPage}>
-            Next
-          </button>
-        </div>
+        <Pagination
+          className="bottom-pg"
+          currentPage={currentPage}
+          pageCount={pageCount}
+          prevPage={prevPage}
+          nextPage={nextPage}
+        />
       </div>
     </DefaultLayout>
   );

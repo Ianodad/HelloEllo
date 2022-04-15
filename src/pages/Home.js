@@ -22,19 +22,21 @@ function Home() {
   return (
     <DefaultLayout>
       <div className="home-header">
-        <h1 className="H1">WELCOME</h1>
-        <h3 className="H3">Pick A BOOK!!!</h3>
+        <h1 className="H1 welcome">WELCOME</h1>
+        <h3 className="H3 pick">Pick A BOOK!!!</h3>
       </div>
       <div className="book-shelves">
         {books?.map((book, keys) => (
-          <Link className="book" keys={keys} to={`/view/${book.title}`}>
-            <div className="card">
-              <div className="card-body">
-                <img src="https://unsplash.it/130/180" alt="book" />
+          <div className="book">
+            <Link keys={keys} to={`/view/${book.title}`}>
+              <div className="book-card">
+                <div className="card-body">
+                  <p className="book-title">{book.title}</p>
+                  <p className="book-author">{book.author}</p>
+                </div>
               </div>
-            </div>
-            <div className="book-title">{book.title}</div>
-          </Link>
+            </Link>
+          </div>
         ))}
       </div>
     </DefaultLayout>
