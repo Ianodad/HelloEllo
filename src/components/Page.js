@@ -1,18 +1,27 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from "react";
 import { ImCircleLeft, ImCircleRight } from "react-icons/im";
+import { useSpeechSynthesis } from "react-speech-kit";
+
+import WordPlay from "./WordPlay";
 
 const Page = React.forwardRef(
   (
-    { tokens, children, onSelectedWord, index: pageIndex, onPrev, onNext },
+    { tokens, onSelectedWord, index: pageIndex, onPrev, onNext, children },
     ref
   ) => {
+    const { speak } = useSpeechSynthesis();
+
     const pageNumber = pageIndex + 1;
+    // const count = 0;
     const handleClick = (word, index) => {
-      // console.log("clicked", word);
-      // console.log("token", tokens[index].value);
+      // const objh = tokens.find((token) =>
+      //   token.position === indexList ? token.value : token.value
+      // );
+
       onSelectedWord(tokens[index].value);
     };
     const checkColor = (strColor) => {
@@ -21,7 +30,19 @@ const Page = React.forwardRef(
 
       return s.color === strColor ? strColor : "";
     };
-    const sentenceCleaner = () => {
+
+    // const getWordIndex = (word) => {
+    //   // const alphaNumOnly = /^[^a-zA-Z0-9]+$/;
+    //   let indexlist = [];
+    //   const indexWord = children.indexOf(word);
+    //   if (indexWord !== -1) {
+    //     const endIndex = indexWord + word.length - 1;
+    //     // console.log(indexWord, endIndex);
+    //     indexlist = [indexWord, endIndex];
+    //   }
+    //   return indexlist;
+    // };
+    const sentenceSplit = () => {
       const regEx = /(^\w{1}|\.\s*\w{1})/gi;
       // eslint-disable-next-line func-names
       const upperCaseString = children.replace(regEx, function (toReplace) {
@@ -30,14 +51,17 @@ const Page = React.forwardRef(
       // console.log("clean", clean);
 
       return upperCaseString.split(/ /g).map((word, index) => (
-        <span
-          className="page-word PG"
-          key={index}
-          style={{ color: checkColor(word) }}
-          onClick={() => handleClick(word, index)}
-        >
-          {` ${word}`}
-        </span>
+        <>
+          {/* {getWordIndex(word)} */}
+          <span
+            className="page-word PG"
+            key={index}
+            style={{ color: checkColor(word.replace(/[^a-zA-Z0-9]/g, "")) }}
+            onClick={() => handleClick(word, index)}
+          >
+            {` ${word}`}
+          </span>
+        </>
       ));
     };
     return (
@@ -52,8 +76,13 @@ const Page = React.forwardRef(
             <ImCircleRight className="next-icon" onClick={onNext} />
           </div>
         )}
+        <div className="page-body">
+          <div className="sentenceSpeech">
+            <WordPlay text={children} />
+          </div>
+          <p className="page-text">{sentenceSplit()}</p>
+        </div>
         <p className="page-number">{pageNumber}</p>
-        <p className="page-text">{sentenceCleaner()}</p>
       </div>
     );
   }

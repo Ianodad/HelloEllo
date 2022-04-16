@@ -36,7 +36,6 @@ function View() {
   };
 
   const onSelectedWord = (word) => {
-    console.log("selected", word);
     setSelectedWord(word);
     setModalVisibility(true);
   };

@@ -2,23 +2,32 @@
 
 #### Example:
 
-This is book book app for kids.
+This is a book app for kids who want to learn to read.
 
 
+## Source Materials
+Wireframes for this project can be found in the [wireframes](https://github.com/Ianodad/HelloEllo/tree/main/wireframes) folder 
+or directly from [Figma](https://www.figma.com/file/ONaPyZjTOfjk4LU4QzYsR7/ElloHello?node-id=0%3A1) 
 ## Project Status
 
 ## Key Feautures
 
 - [x] Fetch data from GraphQL
 - [x] Display word in book
-- [x] Onclick feature each word
-- [x] Display each word in modal from token
+- [x] Display each word on clicked event
+
 
 ## Installation and Setup Instructions
 
 #### Example:
 
 Clone down this repository. You will need `node` and `npm` installed globally on your machine.
+
+clone :
+
+```bash
+git clone https://github.com/Ianodad/HelloEllo.git
+```
 
 Installation:
 
@@ -38,7 +47,7 @@ To Visit App:
 
 ### Run with Docker
 
-```console
+```bash
 cd helloello
 docker build -t helloello .
 

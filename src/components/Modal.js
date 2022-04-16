@@ -4,27 +4,31 @@
 /* eslint-disable no-unused-vars */
 import cx from "classnames";
 import React from "react";
-import { IoClose } from "react-icons/io5";
+import { GrClose } from "react-icons/gr";
 
+import WordPlay from "./WordPlay";
+// handles modal for word on click render
 function ModalContainer({ modalVisibility, handleClose, selectedWord }) {
   return (
     <>
+      {/* dynamic class for dynamic styling */}
       <div
         className={cx("modal-container", { hidden: !modalVisibility })}
         open={modalVisibility}
       >
         <div className="modal-body">
-          <div>
-            <p className="modal-text PG">{selectedWord}</p>
-          </div>
-          <div
-            onClick={() => handleClose()}
-            className="close-button"
-            tabIndex="0"
-          >
-            <IoClose />
+          <p className="modal-text PG">{selectedWord}</p>
+          <div className="modal-action">
+            <WordPlay text={selectedWord} />
           </div>
         </div>
+        <button
+          type="button"
+          onClick={() => handleClose()}
+          className="close-button"
+        >
+          <GrClose />
+        </button>
       </div>
       <div
         className={cx("modal-overlay", { hidden: !modalVisibility })}
