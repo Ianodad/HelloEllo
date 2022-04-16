@@ -4,10 +4,11 @@
 
 This is a book app for kids who want to learn to read.
 
-
 ## Source Materials
-Wireframes for this project can be found in the [wireframes](https://github.com/Ianodad/HelloEllo/tree/main/wireframes) folder 
-or directly from [Figma](https://www.figma.com/file/ONaPyZjTOfjk4LU4QzYsR7/ElloHello?node-id=0%3A1) 
+
+Wireframes for this project can be found in the [wireframes](https://github.com/Ianodad/HelloEllo/tree/main/wireframes) folder
+or directly from [Figma](https://www.figma.com/file/ONaPyZjTOfjk4LU4QzYsR7/HelloEllo?node-id=0%3A1)
+
 ## Project Status
 
 ## Key Feautures
@@ -15,7 +16,6 @@ or directly from [Figma](https://www.figma.com/file/ONaPyZjTOfjk4LU4QzYsR7/ElloH
 - [x] Fetch data from GraphQL
 - [x] Display word in book
 - [x] Display each word on clicked event
-
 
 ## Installation and Setup Instructions
 
