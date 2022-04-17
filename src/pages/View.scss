@@ -1,5 +1,5 @@
 @import "../config/variables";
-
+// outermost container for the view
 .view-container {
   display: flex;
   flex-direction: column;
@@ -11,8 +11,7 @@
   .--portrait {
     padding-bottom: 20% !important;
   }
-
-  .book-actions {
+  .pagination-container {
     margin-top: 3em;
     display: flex;
     flex-direction: row;
@@ -25,12 +24,15 @@
     .pagination {
       font-family: $roboto;
     }
+    // handle pagination e
     button {
       border: none;
       background: none;
       &.open-button {
         border: solid 0.4em $background-tertiary;
         border-radius: 1.4em;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
         .open-button-text {
           font-size: 2.5em;
           color: $background-tertiary;
@@ -47,8 +49,7 @@
       cursor: pointer;
       svg {
         color: $background-tertiary;
-        -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
-        filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+        filter: drop-shadow(4px 1px 2px rgba(80, 80, 80, 0.7));
         &:hover {
           color: $background-primary;
         }
@@ -82,7 +83,7 @@
         transform: scale(1);
       }
     }
-
+    // handle opne icon on cover
     .open-icon-container {
       margin-top: 1.5em;
       margin-right: 1.5em;
@@ -92,14 +93,14 @@
         float: right;
         font-size: 3.5em;
         cursor: pointer;
-        -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
-        filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+        filter: drop-shadow(4px 1px 2px rgba(80, 80, 80, 0.7));
         &:hover {
           transform: scale(1.1);
         }
       }
     }
   }
+  // overall container for the page
   .page {
     background-color: white;
     border: solid 3px grey;
@@ -118,6 +119,55 @@
         .page-text {
           .page-word {
             transition: all 0.1s ease-in-out;
+            &.chameleon,
+            &.chameleons {
+              color: black;
+              -webkit-animation: changeColor 10s infinite;
+            }
+            &.tiger,
+            &.tigers {
+              background: linear-gradient(
+                90deg,
+                rgba(195, 101, 0, 1) 0%,
+                rgba(0, 0, 0, 1) 6%,
+                rgba(195, 101, 0, 1) 12%,
+                rgba(0, 0, 0, 1) 18%,
+                rgba(195, 101, 0, 1) 24%,
+                rgba(0, 0, 0, 1) 30%,
+                rgba(195, 101, 0, 1) 36%,
+                rgba(0, 0, 0, 1) 42%,
+                rgba(195, 101, 0, 1) 48%,
+                rgba(0, 0, 0, 1) 54%,
+                rgba(195, 101, 0, 1) 60%,
+                rgba(0, 0, 0, 1) 66%,
+                rgba(195, 101, 0, 1) 72%,
+                rgba(0, 0, 0, 1) 78%,
+                rgba(195, 101, 0, 1) 84%,
+                rgba(0, 0, 0, 1) 90%,
+                rgba(195, 101, 0, 1) 96%,
+                rgba(0, 0, 0, 1) 100%
+              );
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+            }
+            &.leaf {
+              color: green;
+            }
+            @keyframes changeColor {
+              0% {
+                color: $background-primary;
+              }
+              50% {
+                color: $background-tertiary;
+              }
+              80% {
+                color: $background-secondary;
+              }
+              100% {
+                color: $background-tertiary-two;
+              }
+            }
+
             &:hover {
               color: $background-tertiary;
               transform: scale(1.1);
@@ -127,6 +177,7 @@
         }
       }
     }
+    // handle style on the left page
     &.--left {
       border-right: 0;
       box-shadow: inset -7px 0 30px -7px rgba(0, 0, 0, 0.4);
@@ -145,8 +196,8 @@
 
         svg {
           color: $background-tertiary;
-          -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
-          filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+          // -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+          filter: drop-shadow(4px 1px 2px rgba(80, 80, 80, 0.7));
           &:hover {
             cursor: pointer;
             transform: scale(1.1);
@@ -155,7 +206,7 @@
         }
       }
     }
-
+    // handle style on the right page
     &.--right {
       border-left: 0;
       box-shadow: inset 7px 0 30px -7px rgba(0, 0, 0, 0.4);
@@ -176,8 +227,7 @@
         font-size: 3em;
         svg {
           color: $background-tertiary;
-          -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
-          filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+          filter: drop-shadow(4px 1px 2px rgba(80, 80, 80, 0.7));
           &:hover {
             cursor: pointer;
             transform: scale(1.1);
@@ -190,7 +240,7 @@
         text-align: right;
       }
     }
-
+    // page cover styling
     &.page-cover {
       // background: linear-gradient(
       //   90deg,
@@ -251,7 +301,7 @@
     }
   }
 }
-
+// modal container styling
 .modal-container {
   position: absolute;
   left: 50%;

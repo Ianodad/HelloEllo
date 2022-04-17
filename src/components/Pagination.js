@@ -4,7 +4,7 @@ import { BiCaretLeftCircle, BiCaretRightCircle } from "react-icons/bi";
 
 function Pagination({ className, currentPage, pageCount, nextPage, prevPage }) {
   return (
-    <div className={cx("book-actions", className)}>
+    <div className={cx("pagination-container", className)}>
       {currentPage === 0 && (
         <button className="open-button" type="button" onClick={nextPage}>
           <span className="open-button-text">OPEN</span>
