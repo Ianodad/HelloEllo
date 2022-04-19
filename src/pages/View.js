@@ -6,8 +6,8 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import HTMLFlipBook from "react-pageflip";
 
 import BookCover from "../components/BookCover";
+import BookPage from "../components/BookPage";
 import Modal from "../components/Modal";
-import Page from "../components/Page";
 import Pagination from "../components/Pagination";
 import { GET_BOOK } from "../graphql/Queries";
 import DefaultLayout from "../layouts/DefaultLayout";
@@ -96,7 +96,7 @@ function View() {
           />
           {bookPages.map((page, index) => (
             <div className="page" key={index}>
-              <Page
+              <BookPage
                 className="page"
                 index={index}
                 tokens={page.tokens}
@@ -105,7 +105,7 @@ function View() {
                 onNext={() => nextPage()}
               >
                 {page.content}
-              </Page>
+              </BookPage>
             </div>
           ))}
           <BookCover title="THE END" />

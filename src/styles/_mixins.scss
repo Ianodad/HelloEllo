@@ -1,0 +1,44 @@
+@mixin tigerTextColor {
+  background: linear-gradient(
+    90deg,
+    rgba(195, 101, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 6%,
+    rgba(195, 101, 0, 1) 12%,
+    rgba(0, 0, 0, 1) 18%,
+    rgba(195, 101, 0, 1) 24%,
+    rgba(0, 0, 0, 1) 30%,
+    rgba(195, 101, 0, 1) 36%,
+    rgba(0, 0, 0, 1) 42%,
+    rgba(195, 101, 0, 1) 48%,
+    rgba(0, 0, 0, 1) 54%,
+    rgba(195, 101, 0, 1) 60%,
+    rgba(0, 0, 0, 1) 66%,
+    rgba(195, 101, 0, 1) 72%,
+    rgba(0, 0, 0, 1) 78%,
+    rgba(195, 101, 0, 1) 84%,
+    rgba(0, 0, 0, 1) 90%,
+    rgba(195, 101, 0, 1) 96%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin chameleonTextColor {
+  color: black;
+  -webkit-animation: changeColor 10s infinite;
+}
+@keyframes changeColor {
+  0% {
+    color: $background-primary;
+  }
+  50% {
+    color: $background-tertiary;
+  }
+  80% {
+    color: $background-secondary;
+  }
+  100% {
+    color: $background-tertiary-two;
+  }
+}

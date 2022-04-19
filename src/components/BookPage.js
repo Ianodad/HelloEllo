@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -7,9 +8,14 @@ import React from "react";
 import { ImCircleLeft, ImCircleRight } from "react-icons/im";
 import { useSpeechSynthesis } from "react-speech-kit";
 
+import {
+  capitalizeSentence,
+  checkStringColor,
+  removeSpecialCharacters,
+} from "../helpers/index";
 import WordPlay from "./WordPlay";
 
-const Page = React.forwardRef(
+const BookPage = React.forwardRef(
   (
     { tokens, onSelectedWord, index: pageIndex, onPrev, onNext, children },
     ref
@@ -17,32 +23,20 @@ const Page = React.forwardRef(
     const { speak } = useSpeechSynthesis();
 
     const pageNumber = pageIndex + 1;
+
     const handleClick = (word, index) => {
       onSelectedWord(tokens[index].value);
     };
-    const checkColor = (strColor) => {
-      const s = new Option().style;
-      s.color = strColor;
 
-      return s.color === strColor ? strColor : "";
-    };
-    const wordClean = (str) => {
-      return str.replace(/[^a-zA-Z0-9]/g, "");
-    };
     // split's sentences into words with own on click button
     const sentenceSplit = () => {
-      // used to check and find complete sentences.
-      const regEx = /(^\w{1}|\.\s*\w{1})/gi;
-      // eslint-disable-next-line func-names
-      const upperCaseString = children.replace(regEx, function (toReplace) {
-        return toReplace.toUpperCase();
-      });
+      const upperCaseString = capitalizeSentence(children);
       // split sentences into words
       return upperCaseString.split(/ /g).map((word, index) => (
         <span
-          className={cx("page-word", "PG", wordClean(word))}
+          className={cx("page-word", "PG", removeSpecialCharacters(word))}
           key={index}
-          style={{ color: checkColor(wordClean(word)) }}
+          style={{ color: checkStringColor(removeSpecialCharacters(word)) }}
           onClick={() => handleClick(word, index)}
         >
           {` ${word}`}
@@ -73,4 +67,4 @@ const Page = React.forwardRef(
   }
 );
 
-export default Page;
+export default BookPage;
