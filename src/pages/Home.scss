@@ -14,12 +14,13 @@
   margin-top: 2rem;
   .book {
     border-radius: 3px;
-    width: 200px;
-    height: 250px;
+    width: 250px;
+    height: 350px;
     transition: 0.2s ease-in-out;
     &:hover {
-      width: 210px;
-      height: 262.5px;
+      transform: scale(1.1);
+      // width: 210px;
+      // height: 262.5px;
     }
     .book-card {
       box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,

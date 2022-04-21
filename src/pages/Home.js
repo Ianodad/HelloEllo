@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import HomeLoader from "../components/Loader/HomeLoader";
 import { GET_AUTHORS } from "../graphql/Queries";
 import DefaultLayout from "../layouts/DefaultLayout";
 
@@ -17,7 +18,12 @@ function Home() {
     }
   }, [data]);
 
-  if (loading) return <DefaultLayout>Loading...</DefaultLayout>;
+  if (loading)
+    return (
+      <DefaultLayout>
+        <HomeLoader />
+      </DefaultLayout>
+    );
   if (error) return <DefaultLayout>{error}</DefaultLayout>;
   return (
     <DefaultLayout>

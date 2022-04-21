@@ -7,6 +7,7 @@ import HTMLFlipBook from "react-pageflip";
 
 import BookCover from "../components/BookCover";
 import BookPage from "../components/BookPage";
+import ViewLoader from "../components/Loader/ViewLoader";
 import Modal from "../components/Modal";
 import Pagination from "../components/Pagination";
 import { GET_BOOK } from "../graphql/Queries";
@@ -57,7 +58,12 @@ function View() {
       setPages(data.book.pages);
     }
   }, [data]);
-  if (loading) return <DefaultLayout>Loading...</DefaultLayout>;
+  if (loading)
+    return (
+      <DefaultLayout>
+        <ViewLoader />
+      </DefaultLayout>
+    );
   if (error) return <DefaultLayout>{error}</DefaultLayout>;
 
   return (
@@ -82,7 +88,7 @@ function View() {
           width={500}
           height={700}
           minHeight={200}
-          minWidth={200}
+          minWidth={280}
           ref={book}
           onInit={onInit}
           onFlip={onFlip}

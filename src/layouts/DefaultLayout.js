@@ -9,7 +9,7 @@ const defaultLayout = ({ children }) => {
       <Link to="/" className="nav-main">
         HOME
       </Link>
-      <div>{children}</div>
+      <div className="child-container">{children}</div>
     </div>
   );
 };
