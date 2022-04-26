@@ -5,9 +5,9 @@ function ViewLoader() {
   return (
     <ContentLoader
       speed={2}
-      width={500}
+      width={550}
       height={700}
-      viewBox="0 0 500 700"
+      viewBox="0 0 550 700"
       backgroundColor="#f3f3f3"
       foregroundColor="#ecebeb"
     >

@@ -56,7 +56,7 @@ const BookPage = React.forwardRef(
           </div>
         )}
         <div className="page-body">
-          <div className="sentenceSpeech">
+          <div className="sentence-speech">
             <WordPlay text={children} />
           </div>
           <p className="page-text">{sentenceSplit()}</p>

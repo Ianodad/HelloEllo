@@ -85,7 +85,7 @@ function View() {
         />
         <HTMLFlipBook
           showCover
-          width={500}
+          width={550}
           height={700}
           minHeight={200}
           minWidth={280}
