@@ -28,33 +28,13 @@ const BookPage = React.forwardRef(
 
     const pageNumber = pageIndex + 1;
 
-    const handleClick = ({ event, element }) => {
-      // if (event.target !== element) {
-      //   event.stopPropagation();
-      //   return;
-      // }
-      // event.preventDefault();
-      console.log(event);
-      // onSelectedWord(element);
+    const handleClick = ( word ) => {
+
+      onSelectedWord(word);
     };
 
     const tokensSentenceMap = () => {
       let sentence = children;
-      // console.log(tokens);
-      // const newS = tokens.reduceRight(
-      //   (sentenceString, { position, value }, index) => {
-      //     const indexStart = position[0];
-      //     const indexEnd = position[2];
-      //     return `${sentenceString.substring(
-      //       0,
-      //       indexStart
-      //     )}<span>${sentenceString.substring(
-      //       indexStart,
-      //       indexEnd
-      //     )}</span>${sentenceString.substring(indexEnd)}`;
-      //   },
-      //   sentence
-      // );
 
       for (let i = tokens.length - 1; i >= 0; i--) {
         // destructure the tokens properties
@@ -85,20 +65,20 @@ const BookPage = React.forwardRef(
     };
 
     // split's sentences into words with own on click button
-    const sentenceSplit = () => {
-      const upperCaseString = capitalizeSentence(children);
-      // split sentences into words
-      return upperCaseString.split(/ /g).map((word, index) => (
-        <span
-          className={cx("page-word", "PG", removeSpecialCharacters(word))}
-          key={index}
-          style={{ color: checkStringColor(removeSpecialCharacters(word)) }}
-          onClick={() => handleClick(word, index)}
-        >
-          {` ${word}`}
-        </span>
-      ));
-    };
+    // const sentenceSplit = () => {
+    //   const upperCaseString = capitalizeSentence(children);
+    //   // split sentences into words
+    //   return upperCaseString.split(/ /g).map((word, index) => (
+    //     <span
+    //       className={cx("page-word", "PG", removeSpecialCharacters(word))}
+    //       key={index}
+    //       style={{ color: checkStringColor(removeSpecialCharacters(word)) }}
+    //       onClick={() => handleClick(word, index)}
+    //     >
+    //       {` ${word}`}
+    //     </span>
+    //   ));
+    // };
 
     useEffect(() => {
       // tokensMap();
