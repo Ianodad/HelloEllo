@@ -33,52 +33,52 @@ const BookPage = React.forwardRef(
       onSelectedWord(word);
     };
 
-    const tokensSentenceMap = () => {
-      let sentence = children;
+    // const tokensSentenceMap = () => {
+    //   let sentence = children;
 
-      for (let i = tokens.length - 1; i >= 0; i--) {
-        // destructure the tokens properties
-        const { position, value } = tokens[i];
-        // get start index position of the word
-        const indexStart = position[0];
-        // get end index position of the word
-        const indexEnd = position[1];
-        // get the pre string sentence from index 0 to the start of word indexStart: ;
-        const preSentence = sentence.substring(0, indexStart);
-        // get the post string sentence from the end of word indexEnd to the end of sentence: ;
-        const postSentence = sentence.substring(indexEnd);
-        // get the word string from the start of word indexStart to the end of word indexEnd: ;
-        const word = sentence.substring(indexStart, indexEnd);
-        // get the word if it color for styling purposes
-        const wordColor = checkStringColor(removeSpecialCharacters(word));
-        // styles for the word
-        const styles = "color: " + wordColor;
-        // classNames for the word
-        const className = `page-word '${word}'`;
-        // the is the span that contains the span to be replaced between the pre and post sentence
-        const coreSentence = `<span class=${className} style="'${styles}'" onclick=alert('${value}')>${word}</span>`;
+    //   for (let i = tokens.length - 1; i >= 0; i--) {
+    //     // destructure the tokens properties
+    //     const { position, value } = tokens[i];
+    //     // get start index position of the word
+    //     const indexStart = position[0];
+    //     // get end index position of the word
+    //     const indexEnd = position[1];
+    //     // get the pre string sentence from index 0 to the start of word indexStart: ;
+    //     const preSentence = sentence.substring(0, indexStart);
+    //     // get the post string sentence from the end of word indexEnd to the end of sentence: ;
+    //     const postSentence = sentence.substring(indexEnd);
+    //     // get the word string from the start of word indexStart to the end of word indexEnd: ;
+    //     const word = sentence.substring(indexStart, indexEnd);
+    //     // get the word if it color for styling purposes
+    //     const wordColor = checkStringColor(removeSpecialCharacters(word));
+    //     // styles for the word
+    //     const styles = "color: " + wordColor;
+    //     // classNames for the word
+    //     const className = `page-word '${word}'`;
+    //     // the is the span that contains the span to be replaced between the pre and post sentence
+    //     const coreSentence = `<span class=${className} style="'${styles}'" onclick=alert('${value}')>${word}</span>`;
 
-        sentence = `${preSentence}${coreSentence}${postSentence}`;
-      }
+    //     sentence = `${preSentence}${coreSentence}${postSentence}`;
+    //   }
 
-      return sentence;
-    };
+    //   return sentence;
+    // };
 
     // split's sentences into words with own on click button
-    // const sentenceSplit = () => {
-    //   const upperCaseString = capitalizeSentence(children);
-    //   // split sentences into words
-    //   return upperCaseString.split(/ /g).map((word, index) => (
-    //     <span
-    //       className={cx("page-word", "PG", removeSpecialCharacters(word))}
-    //       key={index}
-    //       style={{ color: checkStringColor(removeSpecialCharacters(word)) }}
-    //       onClick={() => handleClick(word, index)}
-    //     >
-    //       {` ${word}`}
-    //     </span>
-    //   ));
-    // };
+    const sentenceSplit = () => {
+      const upperCaseString = capitalizeSentence(children);
+      // split sentences into words
+      return upperCaseString.split(/ /g).map((word, index) => (
+        <span
+          className={cx("page-word", "PG", removeSpecialCharacters(word))}
+          key={index}
+          style={{ color: checkStringColor(removeSpecialCharacters(word)) }}
+          onClick={() => handleClick(word, index)}
+        >
+          {` ${word}`}
+        </span>
+      ));
+    };
 
     useEffect(() => {
       // tokensMap();
@@ -99,11 +99,11 @@ const BookPage = React.forwardRef(
           <div className="sentence-speech">
             <WordPlay text={children} />
           </div>
-          {/* <p className="page-text">{sentenceSplit()}</p> */}
-          <p
+          <p className="page-text">{sentenceSplit()}</p>
+          {/* <p
             className="page-text PG"
             dangerouslySetInnerHTML={{ __html: tokensSentenceMap() }}
-          />
+          /> */}
         </div>
         <p className="page-number">{pageNumber}</p>
       </div>
