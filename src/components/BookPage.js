@@ -1,10 +1,14 @@
+/* eslint-disable prefer-template */
+/* eslint-disable no-plusplus */
+/* eslint-disable array-callback-return */
 /* eslint-disable func-names */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import cx from "classnames";
-import React from "react";
+import React, { useEffect } from "react";
+// import ReactHtmlParser from "react-html-parser";
 import { ImCircleLeft, ImCircleRight } from "react-icons/im";
 import { useSpeechSynthesis } from "react-speech-kit";
 
@@ -24,8 +28,60 @@ const BookPage = React.forwardRef(
 
     const pageNumber = pageIndex + 1;
 
-    const handleClick = (word, index) => {
-      onSelectedWord(tokens[index].value);
+    const handleClick = ({ event, element }) => {
+      // if (event.target !== element) {
+      //   event.stopPropagation();
+      //   return;
+      // }
+      // event.preventDefault();
+      console.log(event);
+      // onSelectedWord(element);
+    };
+
+    const tokensSentenceMap = () => {
+      let sentence = children;
+      // console.log(tokens);
+      // const newS = tokens.reduceRight(
+      //   (sentenceString, { position, value }, index) => {
+      //     const indexStart = position[0];
+      //     const indexEnd = position[2];
+      //     return `${sentenceString.substring(
+      //       0,
+      //       indexStart
+      //     )}<span>${sentenceString.substring(
+      //       indexStart,
+      //       indexEnd
+      //     )}</span>${sentenceString.substring(indexEnd)}`;
+      //   },
+      //   sentence
+      // );
+
+      for (let i = tokens.length - 1; i >= 0; i--) {
+        // destructure the tokens properties
+        const { position, value } = tokens[i];
+        // get start index position of the word
+        const indexStart = position[0];
+        // get end index position of the word
+        const indexEnd = position[1];
+        // get the pre string sentence from index 0 to the start of word indexStart: ;
+        const preSentence = sentence.substring(0, indexStart);
+        // get the post string sentence from the end of word indexEnd to the end of sentence: ;
+        const postSentence = sentence.substring(indexEnd);
+        // get the word string from the start of word indexStart to the end of word indexEnd: ;
+        const word = sentence.substring(indexStart, indexEnd);
+        // get the word if it color for styling purposes
+        const wordColor = checkStringColor(removeSpecialCharacters(word));
+        // styles for the word
+        const styles = "color: " + wordColor;
+        // classNames for the word
+        const className = `page-word '${word}'`;
+        // the is the span that contains the span to be replaced between the pre and post sentence
+        const coreSentence = `<span class=${className} style="'${styles}'" onclick=alert('${value}')>${word}</span>`;
+
+        sentence = `${preSentence}${coreSentence}${postSentence}`;
+      }
+
+      return sentence;
     };
 
     // split's sentences into words with own on click button
@@ -43,6 +99,10 @@ const BookPage = React.forwardRef(
         </span>
       ));
     };
+
+    useEffect(() => {
+      // tokensMap();
+    }, []);
     return (
       <div className="page-content" ref={ref}>
         {pageNumber % 2 !== 0 && (
@@ -59,7 +119,11 @@ const BookPage = React.forwardRef(
           <div className="sentence-speech">
             <WordPlay text={children} />
           </div>
-          <p className="page-text">{sentenceSplit()}</p>
+          {/* <p className="page-text">{sentenceSplit()}</p> */}
+          <p
+            className="page-text PG"
+            dangerouslySetInnerHTML={{ __html: tokensSentenceMap() }}
+          />
         </div>
         <p className="page-number">{pageNumber}</p>
       </div>
