@@ -1,5 +1,8 @@
 const checkStringColor = (stringColor) => {
   const styleColor = new Option().style;
+  if (stringColor === "white") {
+    return "#F1F1F1";
+  }
   styleColor.color = stringColor;
 
   return styleColor.color === stringColor ? stringColor : "";

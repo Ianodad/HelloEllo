@@ -24,7 +24,14 @@ import WordPlay from "./WordPlay";
 
 const BookPage = React.forwardRef(
   (
-    { tokens, onSelectedWord, index: pageIndex, onPrev, onNext, children },
+    {
+      tokens: tokensArray,
+      onSelectedWord,
+      index: pageIndex,
+      onPrev,
+      onNext,
+      children,
+    },
     ref
   ) => {
     const pageNumber = pageIndex + 1;
@@ -33,9 +40,9 @@ const BookPage = React.forwardRef(
       onSelectedWord(word);
     };
 
-    const tokensSentenceMap = () => {
-      let sentence = children;
-
+    const tokensSentenceMap = (childSentence, tokens) => {
+      let sentence = childSentence;
+      // console.log("sen", sen);
       for (let i = tokens.length - 1; i >= 0; i--) {
         // destructure the tokens properties
         const { position, value } = tokens[i];
@@ -49,8 +56,10 @@ const BookPage = React.forwardRef(
         const postSentence = sentence.substring(indexEnd);
         // get the word string from the start of word indexStart to the end of word indexEnd: ;
         const word = sentence.substring(indexStart, indexEnd);
-        // get the word if it color for styling purposes
-        const wordColor = checkStringColor(removeSpecialCharacters(word));
+        // get the word if its color for styling purposes
+        const wordColor = checkStringColor(
+          removeSpecialCharacters(word).toLowerCase()
+        );
         // classNames for the word
         const className = cx("page-word", "PG", removeSpecialCharacters(word));
         // this is jsx contains the Word component to be replaced between the pre and post sentence
@@ -84,7 +93,7 @@ const BookPage = React.forwardRef(
             }}
             components={{ Word }}
             className="page-text PG"
-            jsx={tokensSentenceMap()}
+            jsx={tokensSentenceMap(children, tokensArray)}
           />
         </div>
         <p className="page-number">{pageNumber}</p>
